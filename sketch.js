@@ -47,10 +47,18 @@ function draw() {
     createObstacle()
     createBanana()
     if(monkey.isTouching(obstacleGroup)){
-      gameState=END
+      monkey.y=monkey.y-10
+      monkey.scale=monkey.scale-0.02
+      obstacleGroup.destroyEach()
+      if(monkey.scale<0.01){
+        gameState=END
+      }
+        
     }
     if(monkey.isTouching(FoodGroup)){
       FoodGroup.destroyEach()
+      monkey.scale =monkey.scale+0.01
+
     }
     if(frameCount%30===0){
       score = score+1
@@ -61,6 +69,7 @@ function draw() {
     obstacleGroup.setLifetimeEach(-1)
     FoodGroup.setVelocityXEach(0)
     FoodGroup.setLifetimeEach(-1)
+    text("you lost",200,200)
   }
   
   drawSprites()
@@ -88,7 +97,5 @@ function createBanana(){
     FoodGroup.setLifetimeEach(60)
   }
 }
-
-
 
 
